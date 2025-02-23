@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FWI Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 350px;
+            background: #fff;
+            padding: 20px;
+            margin: 50px auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            color: #333;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>FWI Prediction</h1>
+
+        <form action="{{ url_for('predictData') }}" method="POST">
+            <input type="text" name="Temperature" placeholder="Temperature (°C)" required />
+            <input type="text" name="RH" placeholder="Relative Humidity (%)" required />
+            <input type="text" name="Ws" placeholder="Wind Speed (km/h)" required />
+            <input type="text" name="Rain" placeholder="Rainfall (mm)" required />
+            <input type="text" name="FFMC" placeholder="FFMC Index" required />
+            <input type="text" name="DMC" placeholder="DMC Index" required />
+            <input type="text" name="ISI" placeholder="ISI Index" required />
+            <input type="text" name="Classes" placeholder="Fire Class (0 or 1)" required />
+            <input type="text" name="Region" placeholder="Region Code (e.g., 0 or 1)" required />
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if result is not none %}
+            <h2>Predicted FWI: <strong>{{ result }}</strong></h2>
+        {% endif %}
+    </div>
+
+</body>
+</html>
